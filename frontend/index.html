@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign Language to Text & Speech</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <h1>🤟 Sign Language → Text &amp; Speech <span class="badge">with Object Recognition</span></h1>
+    <div class="status" id="connectionStatus">
+      <span class="dot offline" id="statusDot"></span>
+      <span id="statusText">Connecting to server…</span>
+    </div>
+  </header>
+
+  <main class="layout">
+
+    <!-- Camera + detection overlay -->
+    <section class="camera-panel">
+      <div class="video-wrap">
+        <video id="webcam" autoplay playsinline muted></video>
+        <canvas id="overlay"></canvas>
+        <canvas id="captureCanvas" class="hidden"></canvas>
+      </div>
+      <div class="controls">
+        <button id="startBtn" class="btn primary">▶ Start Camera</button>
+        <button id="stopBtn" class="btn danger" disabled>⏹ Stop Camera</button>
+        <label class="toggle">
+          <input type="checkbox" id="speechToggle" checked>
+          <span>🔊 Speak detected signs</span>
+        </label>
+      </div>
+    </section>
+
+    <!-- Output panels -->
+    <section class="output-panel">
+
+      <div class="card">
+        <h2>📝 Recognized Text</h2>
+        <div class="live-text" id="liveText">—</div>
+        <div class="confidence" id="confidenceBar">
+          <div class="confidence-fill" id="confidenceFill"></div>
+        </div>
+        <p class="hint">Sentence builder:</p>
+        <div class="sentence-box" id="sentenceBox"></div>
+        <div class="sentence-controls">
+          <button id="clearSentence" class="btn small">Clear</button>
+          <button id="speakSentence" class="btn small primary">🔊 Speak Sentence</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>👁️ Objects in Frame</h2>
+        <ul class="object-list" id="objectList">
+          <li class="empty">No objects detected yet</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>🕘 Session History</h2>
+        <ul class="history-list" id="historyList">
+          <li class="empty">History will appear here</li>
+        </ul>
+      </div>
+
+    </section>
+  </main>
+
+  <footer class="foot">
+    Frontend: HTML5 / CSS3 / JavaScript &nbsp;·&nbsp; Backend: Python (Flask) &nbsp;·&nbsp; Storage: MySQL
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
